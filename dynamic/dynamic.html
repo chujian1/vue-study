@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dynamic</title>
+    <style>
+        .dynamic{
+            margin-top:10px;
+            width:200px;
+            height:200px;
+            border:1px solid red;
+        }
+    </style>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="my-1" @click="tabComponent(1)"/>
+        <input type="button" value="my-2" @click="tabComponent(2)"/>
+        <input type="button" value="my-3" @click="tabComponent(3)"/>
+        <keep-alive><!--保留状态-->
+            <component :is="current"></component>
+        </keep-alive>
+    </div>
+<script>
+    var my1 = Vue.component("my-1",{
+        template:`
+            <div class="dynamic" @click="changeBg">my-1</div>
+        `,
+        methods:{
+            changeBg(e){
+                e.target.style.background = "red";
+            }
+        }
+    });
+    var my2 = Vue.component("my-2",{
+        template:`
+            <div class="dynamic">my-2</div>
+        `
+    });
+    var my3 = Vue.component("my-3",{
+        template:`
+            <div class="dynamic">my-3</div>
+        `
+    });
+    new Vue({
+        el:"#app",
+        data:{
+            current:my1
+        },
+        methods:{
+            tabComponent(index){
+                if(index === 1){
+                    this.current = my1;
+                }else if(index === 2){
+                    this.current = my2;
+                }else if(index === 3){
+                    this.current = my3;
+                }
+            }
+
+        }
+    })
+
+</script>
+</body>
+</html>
