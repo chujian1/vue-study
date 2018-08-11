@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style>
+        #app{
+            width:200px;height:100px;border:1px solid black;
+        }
+        div div{
+            display:none;
+        }
+        .active{
+            background: yellow;
+        }
+        div.show{
+            display:block;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button
+                v-for="val,key in arr"
+                :class="{active:num==key}"
+                @click="num=key"
+        >{{val}}</button>
+        <div
+                v-for="val,key in arr2"
+                :class="{show:num==key}"
+        >
+            {{val}}
+        </div>
+    </div>
+<script src="../vue.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            arr:["option1","option2","option3"],
+            arr2:["content1","content2","content3"],
+            num:0
+        }
+    })
+</script>
+</body>
+</html>
